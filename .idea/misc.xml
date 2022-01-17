@@ -5,10 +5,12 @@
       <map>
         <entry key="..\:/Users/Angel/AndroidStudioProjects/test/app/src/main/res/layout/activity_main.xml" value="0.3875" />
         <entry key="..\:/Users/Angel/AndroidStudioProjects/test/app/src/main/res/layout/adapter_movie.xml" value="0.22" />
+        <entry key="..\:/Users/Angel/AndroidStudioProjects/test/app/src/main/res/layout/adapter_photo.xml" value="0.4701348747591522" />
         <entry key="..\:/Users/Angel/AndroidStudioProjects/test/app/src/main/res/layout/app_bar_main.xml" value="0.1" />
         <entry key="..\:/Users/Angel/AndroidStudioProjects/test/app/src/main/res/layout/content_main.xml" value="0.3229665071770335" />
         <entry key="..\:/Users/Angel/AndroidStudioProjects/test/app/src/main/res/layout/fragment_gallery.xml" value="0.1" />
         <entry key="..\:/Users/Angel/AndroidStudioProjects/test/app/src/main/res/layout/fragment_home.xml" value="0.2814814814814815" />
+        <entry key="..\:/Users/Angel/AndroidStudioProjects/test/app/src/main/res/layout/fragment_more_details.xml" value="0.3875" />
         <entry key="..\:/Users/Angel/AndroidStudioProjects/test/app/src/main/res/layout/fragment_slideshow.xml" value="0.1" />
         <entry key="..\:/Users/Angel/AndroidStudioProjects/test/app/src/main/res/layout/nav_header_main.xml" value="0.1" />
         <entry key="..\:/Users/Angel/AndroidStudioProjects/test/app/src/main/res/menu/activity_main_drawer.xml" value="0.1" />

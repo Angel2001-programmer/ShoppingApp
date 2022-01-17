@@ -4,7 +4,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.angel.test.MainRepository
-import com.angel.test.photo
+import com.angel.test.value
+import com.angel.test.valueItem
 import kotlinx.coroutines.*
 
 class HomeViewModel constructor(private val mainRepository: MainRepository) : ViewModel() {
@@ -15,7 +16,7 @@ class HomeViewModel constructor(private val mainRepository: MainRepository) : Vi
     val text: LiveData<String> = _text
 
     val errorMessage = MutableLiveData<String>()
-    val movieList = MutableLiveData<List<photo>>()
+    val movieList = MutableLiveData<List<valueItem>>()
     var job: Job? = null
     val exceptionHandler = CoroutineExceptionHandler {
             _, throwable -> onError("Exception handled: ${throwable.localizedMessage}")

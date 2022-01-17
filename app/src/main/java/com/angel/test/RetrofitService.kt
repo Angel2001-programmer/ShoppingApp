@@ -6,15 +6,15 @@ import retrofit2.http.GET
 
 interface RetrofitService {
 
-    @GET("photos.json")
-    suspend fun getAllMovies() : Response<List<photo>>
+    @GET("products")
+    suspend fun getAllMovies() : Response<List<valueItem>>
 
     companion object {
         var retrofitService: RetrofitService? = null
         fun getInstance() : RetrofitService {
             if (retrofitService == null) {
                 val retrofit = Retrofit.Builder()
-                    .baseUrl("https://jsonplaceholder.typicode.com/")
+                    .baseUrl("https://fakestoreapi.com/")
                     .addConverterFactory(GsonConverterFactory.create())
                     .build()
                 retrofitService =
