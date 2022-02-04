@@ -1,6 +1,8 @@
+
 package com.angel.test
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -10,6 +12,12 @@ import android.view.ViewGroup
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
+private const val TAG = "MoreDetailsFragment"
+var image: String? = null
+var name: String? = null
+var desc: String? = null
+var price: Double? = 0.0
+
 
 /**
  * A simple [Fragment] subclass.
@@ -33,6 +41,14 @@ class MoreDetailsFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
+        image = arguments?.getString("uri")
+        name = arguments?.getString("title")
+        desc = arguments?.getString("description")
+        price = arguments?.getDouble("price")
+
+        Log.d(TAG, "onCreateView: " + image + " | " + name + " | " + desc + " | " + price)
+
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_more_details, container, false)
     }

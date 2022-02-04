@@ -1,6 +1,6 @@
 package com.angel.test.ui.home
 
-import android.icu.text.CaseMap
+import com.angel.test.Communicator
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -18,6 +18,7 @@ class HomeFragment : Fragment() {
     private var _binding: FragmentHomeBinding? = null
     private val TAG = "HomeFragment"
     private val adapter = PhotoAdapter()
+    private lateinit var communicator: Communicator
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -62,13 +63,21 @@ class HomeFragment : Fragment() {
 
         homeViewModel.getAllMovies()
 
+        communicator = activity as Communicator
+
         adapter.setOnItemClickListener(object : PhotoAdapter.onitemClickListener{
             override fun onItemClick(position: Int) {
 
-                Log.d(TAG, "onItemClick: $position.")
+                val image = adapter.movieList.get(position).image
+                val name = adapter.movieList.get(position).title
+                val desc = adapter.movieList.get(position).description
+                val price = adapter.movieList.get(position).price
+
+                communicator.passData(image, name, desc, price)
+
+                Log.d(TAG, "onItemClick: $position")
             }
         })
-
         return root
     }
 

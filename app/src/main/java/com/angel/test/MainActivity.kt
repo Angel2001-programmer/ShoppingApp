@@ -12,11 +12,16 @@ import androidx.navigation.ui.setupWithNavController
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.appcompat.app.AppCompatActivity
 import com.angel.test.databinding.ActivityMainBinding
+import com.angel.test.ui.home.HomeFragment
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), Communicator {
 
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMainBinding
+
+    var homeFragment = HomeFragment()
+    val moreDetailsFragment = MoreDetailsFragment()
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,6 +47,8 @@ class MainActivity : AppCompatActivity() {
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
+
+        supportFragmentManager.beginTransaction().replace(R.id.nav_host_fragment_content_main, homeFragment).commitAllowingStateLoss()
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -53,5 +60,19 @@ class MainActivity : AppCompatActivity() {
     override fun onSupportNavigateUp(): Boolean {
         val navController = findNavController(R.id.nav_host_fragment_content_main)
         return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
+    }
+
+        override fun passData(image: String, name: String, desc: String, price: Double) {
+        val bundle = Bundle()
+        bundle.putString("uri", image)
+            bundle.putString("title", name)
+            bundle.putString("description", desc)
+            bundle.putDouble("price", price)
+
+            val transaction = this.supportFragmentManager.beginTransaction()
+        moreDetailsFragment.arguments = bundle
+
+        transaction.replace(R.id.nav_host_fragment_content_main, moreDetailsFragment)
+            transaction.commitAllowingStateLoss()
     }
 }
