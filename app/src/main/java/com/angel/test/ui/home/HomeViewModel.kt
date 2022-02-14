@@ -4,7 +4,6 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.angel.test.MainRepository
-import com.angel.test.value
 import com.angel.test.valueItem
 import kotlinx.coroutines.*
 

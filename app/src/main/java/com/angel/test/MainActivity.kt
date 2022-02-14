@@ -1,3 +1,4 @@
+
 package com.angel.test
 
 import android.os.Bundle
@@ -62,17 +63,17 @@ class MainActivity : AppCompatActivity(), Communicator {
         return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
     }
 
-        override fun passData(image: String, name: String, desc: String, price: Double) {
+    override fun passData(image: String, name: String, desc: String, price: Double) {
         val bundle = Bundle()
         bundle.putString("uri", image)
-            bundle.putString("title", name)
-            bundle.putString("description", desc)
-            bundle.putDouble("price", price)
+        bundle.putString("title", name)
+        bundle.putString("description", desc)
+        bundle.putDouble("price", price)
 
-            val transaction = this.supportFragmentManager.beginTransaction()
+        val transaction = this.supportFragmentManager.beginTransaction()
         moreDetailsFragment.arguments = bundle
 
-        transaction.replace(R.id.nav_host_fragment_content_main, moreDetailsFragment)
-            transaction.commitAllowingStateLoss()
+        transaction.replace(R.id.nav_host_fragment_content_main, moreDetailsFragment).addToBackStack(null)
+        transaction.commitAllowingStateLoss()
     }
 }

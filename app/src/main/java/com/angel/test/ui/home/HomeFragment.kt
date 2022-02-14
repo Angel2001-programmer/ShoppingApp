@@ -72,6 +72,7 @@ class HomeFragment : Fragment() {
                 val name = adapter.movieList.get(position).title
                 val desc = adapter.movieList.get(position).description
                 val price = adapter.movieList.get(position).price
+//                val rates = adapter.movieList.get(position).rating
 
                 communicator.passData(image, name, desc, price)
 
