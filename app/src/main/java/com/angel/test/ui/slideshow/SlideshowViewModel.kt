@@ -1,11 +1,11 @@
 package com.angel.test.ui.slideshow
 
+import androidx.annotation.NonNull
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
 class SlideshowViewModel : ViewModel() {
-
     private val _text = MutableLiveData<String>().apply {
         value = "This is slideshow Fragment"
     }

@@ -3,6 +3,7 @@ package com.angel.test
 
 import android.os.Bundle
 import android.view.Menu
+import android.widget.TextView
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.navigation.NavigationView
 import androidx.navigation.findNavController
@@ -14,6 +15,7 @@ import androidx.drawerlayout.widget.DrawerLayout
 import androidx.appcompat.app.AppCompatActivity
 import com.angel.test.databinding.ActivityMainBinding
 import com.angel.test.ui.home.HomeFragment
+import com.angel.test.ui.slideshow.SlideshowFragment
 
 class MainActivity : AppCompatActivity(), Communicator {
 
@@ -22,7 +24,6 @@ class MainActivity : AppCompatActivity(), Communicator {
 
     var homeFragment = HomeFragment()
     val moreDetailsFragment = MoreDetailsFragment()
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -63,7 +64,7 @@ class MainActivity : AppCompatActivity(), Communicator {
         return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
     }
 
-    override fun passData(image: String, name: String, desc: String, price: Double) {
+    override fun passProductData(image: String, name: String, desc: String, price: Double) {
         val bundle = Bundle()
         bundle.putString("uri", image)
         bundle.putString("title", name)
@@ -75,5 +76,18 @@ class MainActivity : AppCompatActivity(), Communicator {
 
         transaction.replace(R.id.nav_host_fragment_content_main, moreDetailsFragment).addToBackStack(null)
         transaction.commitAllowingStateLoss()
+    }
+
+    override fun passBasketInfo(image: String, name: String, price: String) {
+        val bundle = Bundle()
+        bundle.putString("uri", image)
+        bundle.putString("title", name)
+        bundle.putString("price", price)
+        val transaction = this.supportFragmentManager.beginTransaction()
+        val slideFragment = SlideshowFragment()
+        slideFragment.arguments = bundle
+
+        transaction.replace(R.id.nav_host_fragment_content_main, slideFragment)
+        transaction.commit()
     }
 }

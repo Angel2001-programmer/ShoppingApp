@@ -74,7 +74,7 @@ class HomeFragment : Fragment() {
                 val price = adapter.movieList.get(position).price
 //                val rates = adapter.movieList.get(position).rating
 
-                communicator.passData(image, name, desc, price)
+                communicator.passProductData(image, name, desc, price)
 
                 Log.d(TAG, "onItemClick: $position")
             }

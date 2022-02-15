@@ -1,6 +1,7 @@
 
 package com.angel.test
 
+import android.app.Activity
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -8,6 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.angel.test.databinding.FragmentMoreDetailsBinding
+import com.angel.test.ui.slideshow.SlideshowFragment
 import com.bumptech.glide.Glide
 import com.google.android.material.snackbar.Snackbar
 
@@ -19,6 +21,7 @@ private const val TAG = "MoreDetailsFragment"
 
 //View databinding
 private lateinit var binding: FragmentMoreDetailsBinding
+private lateinit var communicator: Communicator
 
 //General Variables
 var image: String? = null
@@ -69,13 +72,18 @@ class MoreDetailsFragment : Fragment() {
         binding.tvPrice.text = "£" + price.toString()
 //        binding.ratingBar.rating = rating.toFloat()
         binding.button.text = "Add to Basket " + "£" + price.toString()
-
+        communicator = activity as Communicator
 //        Log.d(TAG, "onCreateView: $rating")
         binding.button.setOnClickListener {
             Log.d(TAG, "onCreateView: clicked")
+            image?.let { it1 -> name?.let { it2 -> price?.let { it3 ->
+                communicator.passBasketInfo(it1, it2,
+                    binding.tvPrice.text.toString()
+                )
+            } } }
+            Log.d(TAG, "onCreateView: " + binding.tvTitle.text.toString() + binding.tvTitle.text.toString() + binding.tvPrice.text.toString())
             Snackbar.make(root, "Added to Cart \n$name", Snackbar.LENGTH_LONG).show()
         }
-
         // Inflate the layout for this fragment
         return root
     }
