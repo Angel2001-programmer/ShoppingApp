@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "660283139320",
+    "project_id": "azon-e765e",
+    "storage_bucket": "azon-e765e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:660283139320:android:c35f5185424300ddd0070d",
+        "android_client_info": {
+          "package_name": "com.angel.test"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "660283139320-fv3csekuk1l0e6ohpvg035cpblomu6b5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAFGHmBaYvcXyD6_WL9_pKmb6UzyIgGt7w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "660283139320-fv3csekuk1l0e6ohpvg035cpblomu6b5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

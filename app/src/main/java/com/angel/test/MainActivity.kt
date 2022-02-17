@@ -1,21 +1,20 @@
-
 package com.angel.test
 
 import android.os.Bundle
 import android.view.Menu
-import android.widget.TextView
-import com.google.android.material.snackbar.Snackbar
-import com.google.android.material.navigation.NavigationView
+import androidx.appcompat.app.AppCompatActivity
+import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
-import androidx.drawerlayout.widget.DrawerLayout
-import androidx.appcompat.app.AppCompatActivity
 import com.angel.test.databinding.ActivityMainBinding
+import com.angel.test.fragments.MoreDetailsFragment
 import com.angel.test.ui.home.HomeFragment
 import com.angel.test.ui.slideshow.SlideshowFragment
+import com.google.android.material.navigation.NavigationView
+import com.google.android.material.snackbar.Snackbar
 
 class MainActivity : AppCompatActivity(), Communicator {
 
@@ -50,7 +49,8 @@ class MainActivity : AppCompatActivity(), Communicator {
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
 
-        supportFragmentManager.beginTransaction().replace(R.id.nav_host_fragment_content_main, homeFragment).commitAllowingStateLoss()
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.nav_host_fragment_content_main, homeFragment).commitAllowingStateLoss()
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -64,8 +64,9 @@ class MainActivity : AppCompatActivity(), Communicator {
         return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
     }
 
-    override fun passProductData(image: String, name: String, desc: String, price: Double) {
+    override fun passProductData(id: Int, image: String, name: String, desc: String, price: Double) {
         val bundle = Bundle()
+        bundle.putInt("id", id)
         bundle.putString("uri", image)
         bundle.putString("title", name)
         bundle.putString("description", desc)
@@ -74,12 +75,14 @@ class MainActivity : AppCompatActivity(), Communicator {
         val transaction = this.supportFragmentManager.beginTransaction()
         moreDetailsFragment.arguments = bundle
 
-        transaction.replace(R.id.nav_host_fragment_content_main, moreDetailsFragment).addToBackStack(null)
+        transaction.replace(R.id.nav_host_fragment_content_main, moreDetailsFragment)
+            .addToBackStack(null)
         transaction.commitAllowingStateLoss()
     }
 
-    override fun passBasketInfo(image: String, name: String, price: String) {
+    override fun passBasketInfo(id: Int, image: String, name: String, price: String) {
         val bundle = Bundle()
+        bundle.putInt("id", id)
         bundle.putString("uri", image)
         bundle.putString("title", name)
         bundle.putString("price", price)

@@ -10,11 +10,11 @@ class PhotoAdapter : RecyclerView.Adapter<MainViewHolder>() {
 
     private lateinit var mListener: onitemClickListener
 
-    interface onitemClickListener{
+    interface onitemClickListener {
         fun onItemClick(position: Int)
     }
 
-    fun setOnItemClickListener(listener: onitemClickListener){
+    fun setOnItemClickListener(listener: onitemClickListener) {
         mListener = listener
     }
 
@@ -37,7 +37,8 @@ class PhotoAdapter : RecyclerView.Adapter<MainViewHolder>() {
         holder.binding.title.text = movie.title
         holder.binding.price.text = "£" + movie.price.toString()
         Glide.with(
-            holder.itemView.context)
+            holder.itemView.context
+        )
             .load(movie.image).override(700, 700)
             .into(holder.binding.image)
     }
@@ -47,7 +48,8 @@ class PhotoAdapter : RecyclerView.Adapter<MainViewHolder>() {
     }
 }
 
-class MainViewHolder(val binding: AdapterPhotoBinding, listener: PhotoAdapter.onitemClickListener) : RecyclerView.ViewHolder(binding.root) {
+class MainViewHolder(val binding: AdapterPhotoBinding, listener: PhotoAdapter.onitemClickListener) :
+    RecyclerView.ViewHolder(binding.root) {
     init {
 
         itemView.setOnClickListener {

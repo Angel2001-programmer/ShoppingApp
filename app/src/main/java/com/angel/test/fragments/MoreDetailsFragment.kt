@@ -1,17 +1,18 @@
+package com.angel.test.fragments
 
-package com.angel.test
-
-import android.app.Activity
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import com.angel.test.Communicator
 import com.angel.test.databinding.FragmentMoreDetailsBinding
-import com.angel.test.ui.slideshow.SlideshowFragment
+import com.angel.test.models.Product
 import com.bumptech.glide.Glide
 import com.google.android.material.snackbar.Snackbar
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -22,8 +23,10 @@ private const val TAG = "MoreDetailsFragment"
 //View databinding
 private lateinit var binding: FragmentMoreDetailsBinding
 private lateinit var communicator: Communicator
+private lateinit var database: DatabaseReference
 
 //General Variables
+var productId: Int? = 0
 var image: String? = null
 var name: String? = null
 var desc: String? = null
@@ -55,6 +58,7 @@ class MoreDetailsFragment : Fragment() {
         binding = FragmentMoreDetailsBinding.inflate(inflater, container, false)
         val root: View = binding.root
         // getting the data and storing it in the new fragment.
+        productId = arguments?.getInt("id")
         image = arguments?.getString("uri")
         name = arguments?.getString("title")
         desc = arguments?.getString("description")
@@ -64,7 +68,7 @@ class MoreDetailsFragment : Fragment() {
         // Setting text and image.
         Glide.with(this)
             .load(image)
-            .override(800,800)
+            .override(800, 800)
             .into(binding.img)
 
         binding.tvTitle.text = name
@@ -74,14 +78,16 @@ class MoreDetailsFragment : Fragment() {
         binding.button.text = "Add to Basket " + "£" + price.toString()
         communicator = activity as Communicator
 //        Log.d(TAG, "onCreateView: $rating")
+
         binding.button.setOnClickListener {
             Log.d(TAG, "onCreateView: clicked")
-            image?.let { it1 -> name?.let { it2 -> price?.let { it3 ->
-                communicator.passBasketInfo(it1, it2,
-                    binding.tvPrice.text.toString()
-                )
-            } } }
-            Log.d(TAG, "onCreateView: " + binding.tvTitle.text.toString() + binding.tvTitle.text.toString() + binding.tvPrice.text.toString())
+            database = FirebaseDatabase.getInstance().getReference("Products")
+            val Products = Product(id, image, name, binding.tvPrice.text.toString())
+            database.child(productId.toString()).setValue(Products).addOnSuccessListener {
+                    Log.d(TAG, "onCreateView: Successfully added to cart")
+                }.addOnFailureListener {
+                    Log.d(TAG, "onCreateView: Failed to add to cart")
+                }
             Snackbar.make(root, "Added to Cart \n$name", Snackbar.LENGTH_LONG).show()
         }
         // Inflate the layout for this fragment
