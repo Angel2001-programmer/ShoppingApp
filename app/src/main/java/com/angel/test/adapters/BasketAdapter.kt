@@ -7,17 +7,17 @@ import com.angel.test.databinding.BasketitemBinding
 import com.angel.test.models.Product
 import com.bumptech.glide.Glide
 
-class BasketAdapter(val productList: ArrayList<Product>) : RecyclerView.Adapter<MainViewHolder1>() {
+class BasketAdapter(private val clientList: ArrayList<Product>) :
+    RecyclerView.Adapter<MainViewHolder1>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MainViewHolder1 {
-
         val inflater = LayoutInflater.from(parent.context)
         val binding = BasketitemBinding.inflate(inflater, parent, false)
         return MainViewHolder1(binding)
     }
 
     override fun onBindViewHolder(holder: MainViewHolder1, position: Int) {
-        val basket = productList[position]
+        val basket = clientList[position]
         Glide.with(
             holder.itemView.context
         )
@@ -29,7 +29,8 @@ class BasketAdapter(val productList: ArrayList<Product>) : RecyclerView.Adapter<
     }
 
     override fun getItemCount(): Int {
-        return productList.size
+        return clientList.size
     }
 }
+
 class MainViewHolder1(val binding: BasketitemBinding) : RecyclerView.ViewHolder(binding.root)

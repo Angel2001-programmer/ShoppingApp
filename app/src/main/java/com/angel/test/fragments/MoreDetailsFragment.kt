@@ -82,12 +82,12 @@ class MoreDetailsFragment : Fragment() {
         binding.button.setOnClickListener {
             Log.d(TAG, "onCreateView: clicked")
             database = FirebaseDatabase.getInstance().getReference("Products")
-            val Products = Product(id, image, name, binding.tvPrice.text.toString())
+            val Products = Product(id, image, name, binding.tvPrice.toString())
             database.child(productId.toString()).setValue(Products).addOnSuccessListener {
-                    Log.d(TAG, "onCreateView: Successfully added to cart")
-                }.addOnFailureListener {
-                    Log.d(TAG, "onCreateView: Failed to add to cart")
-                }
+                Log.d(TAG, "onCreateView: Successfully added to cart")
+            }.addOnFailureListener {
+                Log.d(TAG, "onCreateView: Failed to add to cart")
+            }
             Snackbar.make(root, "Added to Cart \n$name", Snackbar.LENGTH_LONG).show()
         }
         // Inflate the layout for this fragment
