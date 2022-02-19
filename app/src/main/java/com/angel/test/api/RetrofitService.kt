@@ -7,7 +7,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
 
 interface RetrofitService {
-
+// API call
     @GET("products")
     suspend fun getAllMovies(): Response<List<valueItem>>
 

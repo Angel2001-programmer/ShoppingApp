@@ -1,5 +1,6 @@
 package com.angel.test
 
+//Filter the data to retrieve data that you want in this application.
 class value : ArrayList<valueItem>()
 
 data class valueItem(

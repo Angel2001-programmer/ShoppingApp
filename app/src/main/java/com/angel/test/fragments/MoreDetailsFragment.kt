@@ -21,6 +21,8 @@ private const val ARG_PARAM2 = "param2"
 private const val TAG = "MoreDetailsFragment"
 
 //View databinding
+//Communitor class
+//Database
 private lateinit var binding: FragmentMoreDetailsBinding
 private lateinit var communicator: Communicator
 private lateinit var database: DatabaseReference
@@ -30,8 +32,7 @@ var productId: Int? = 0
 var image: String? = null
 var name: String? = null
 var desc: String? = null
-var price: Double? = 0.00
-//var rating: Double? = 0.00
+var price: String? = null
 
 /**
  * A simple [Fragment] subclass.
@@ -45,6 +46,7 @@ class MoreDetailsFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        //Retrieve arguements.
         arguments?.let {
             param1 = it.getString(ARG_PARAM1)
             param2 = it.getString(ARG_PARAM2)
@@ -62,8 +64,7 @@ class MoreDetailsFragment : Fragment() {
         image = arguments?.getString("uri")
         name = arguments?.getString("title")
         desc = arguments?.getString("description")
-        price = arguments?.getDouble("price")
-//        rating = arguments?.getDouble("rating")
+        price = arguments?.getString("price")
 
         // Setting text and image.
         Glide.with(this)
@@ -73,21 +74,21 @@ class MoreDetailsFragment : Fragment() {
 
         binding.tvTitle.text = name
         binding.tvDesc.text = desc
-        binding.tvPrice.text = "£" + price.toString()
-//        binding.ratingBar.rating = rating.toFloat()
-        binding.button.text = "Add to Basket " + "£" + price.toString()
+        binding.tvPrice.text = "£$price"
+        binding.button.text = "Add to Basket " + binding.tvPrice.text
         communicator = activity as Communicator
-//        Log.d(TAG, "onCreateView: $rating")
 
+        //If add to cart button is pressed Add to firebase database.
         binding.button.setOnClickListener {
             Log.d(TAG, "onCreateView: clicked")
             database = FirebaseDatabase.getInstance().getReference("Products")
-            val Products = Product(id, image, name, binding.tvPrice.toString())
+            val Products = Product(id, image, name, binding.tvPrice.text.toString())
             database.child(productId.toString()).setValue(Products).addOnSuccessListener {
                 Log.d(TAG, "onCreateView: Successfully added to cart")
             }.addOnFailureListener {
                 Log.d(TAG, "onCreateView: Failed to add to cart")
             }
+            //notify user that product has been added to the shopping basket.
             Snackbar.make(root, "Added to Cart \n$name", Snackbar.LENGTH_LONG).show()
         }
         // Inflate the layout for this fragment
