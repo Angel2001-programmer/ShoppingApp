@@ -1,7 +1,18 @@
+package com.angel.test.adapters
+
+import android.graphics.Canvas
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
+import com.angel.test.PhotoAdapter
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
+import java.util.*
 
-abstract class SwipeToDeleteCallback : ItemTouchHelper.Callback() {
+abstract class SwipeGesture : ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
+
+    private val adapter = PhotoAdapter()
+    private val root: DatabaseReference = FirebaseDatabase.getInstance().getReference()
+
     override fun getMovementFlags(
         recyclerView: RecyclerView,
         viewHolder: RecyclerView.ViewHolder
